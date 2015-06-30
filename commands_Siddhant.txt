@@ -1,0 +1,47 @@
+1.Create and Checkout a New Branch
+
+#branches from currently checked out directory
+
+git checkout -b <branchName>
+
+2.Configure folder
+
+git config --global user.name "Siddhant"
+
+git config --global user.email siddhant@example.com
+
+
+3.Create a new local repository
+
+git init
+
+4.Check out a repository
+
+git clone /path/to/repository
+
+5.Add files
+
+git add <filename>
+
+6.Commit
+
+git commit -m "Commit message"
+
+7.Push
+
+Send changes to the master branch of your remote repository:
+
+git push origin master
+
+8.Status
+
+List the files you've changed and those you still need to add or commit:
+git status
+
+9.List all the branches in your repo, and also tell you what branch you're currently in
+
+git branch
+
+10. View all the merge conflicts
+
+git diff
