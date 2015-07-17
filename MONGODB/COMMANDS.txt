@@ -1,0 +1,93 @@
+use CMS
+
+
+
+
+db.users.insert({ 
+ name : "siddhant", 
+ pass : "siddhant", 
+ Role : ObjectId("55a7a4c2326b371e42c18c22"),
+ Sign_Up_Date : new Date(2014,07,12), 
+ last_login : new Date(2015,7,12) , 
+ profile : {  Name : "Siddhant Damane"
+
+	 	Address : {
+ 
+			 Local_address : {
+
+			 street : "JM Road",
+			 city : "Pune",
+			 country : "India"
+			 phone : 9028187958
+			 }
+		 }
+	 }
+ }
+ )
+ 
+ 
+db.users.find()
+
+
+
+db.roles.insert(
+{ 
+roleType : "Admin" , 
+permission : ['read','write','add pages'] })
+
+db.roles.insert(
+{ 
+roleType : "editor" , 
+permission : ['read','write'] })
+
+
+
+db.roles.find()
+
+
+
+
+db.blogs.insert({
+... 
+... title : "blog title",
+... slug : "page slug",
+... user_id : ObjectId("55a7ae63326b371e42c18c30"),
+... contents : "contents of blog"
+... ,
+... comments : {
+... first_comment :{ 
+		content : "contents of comments",
+... 		user_id : ObjectId("55a7ab98326b371e42c18c2f")
+... }
+... }
+}
+)
+
+
+
+db.blogs.find()
+
+
+
+
+
+db.pages.insert(
+... {
+... title : "page title",
+... slug : "\page.slug,"
+... ,
+... user_id : ObjectId("55a7ab98326b371e42c18c2f"),
+... contents : "this is the sample page, which discribes mongoDB",
+... views : {
+	... view1 : {
+		... content : "first view on page",
+		... user_id : ObjectId("55a7ab98326b371e42c18c2f")
+	... }
+... }
+... }
+... )
+
+
+
+
+db.pages.find()
