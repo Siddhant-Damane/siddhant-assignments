@@ -5,35 +5,35 @@
 		_id 		: Object_Id
 		name 	: "String"
 		pass 	: "String"
-		Role 	: Object_Id
-		Sign_Up_Date 	: timestamp
+		role 	: Object_Id
+		sign_up_date 	: timestamp
 		last_login 	: timestamp
-		Profile		: {
-		    			Name 	: "String"
-		    			Age 	: Integer
-		    			Date of Birth : timestamp
+		profile		: {
+		    			name 	: "String"
+		    			age 	: Integer
+		    			date of birth : timestamp
 		    			status : "string"
-		    			Address :  {
-							Local_address:{
+		    			address :  {
+							local_address:{
 							
 							_id : Object_id()
-							Street : "String"
-							City : "String"
-							State : "String"
-							Country : "String"
+							street : "String"
+							city : "String"
+							state : "String"
+							country : "String"
 							
-							Phone 		: [Integer]
+							phone 		: [Integer]
 							}
 							
 							Parmanant_address:{
 							
 							_id : Object_id()
-							Street : "String"
-							City : "String"
-							State : "String"
-							Country : "String"
+							street : "String"
+							city : "String"
+							state : "String"
+							country : "String"
 							
-							Phone 		: [Integer]
+							phone 		: [Integer]
 							}
 							
 							
@@ -47,7 +47,7 @@
 
  Roles {
 		_id 		: Object_Id
-		roleType 	: [type of user]
+		role_type 	: [type of user]
 		permissions 	: [permissions]
      	}
 
