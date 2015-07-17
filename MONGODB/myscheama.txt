@@ -1,0 +1,76 @@
+
+
+
+ Users {
+		_id 		: Object_Id
+		name 	: "String"
+		pass 	: "String"
+		role 	: Object_Id
+		sign_up_date 	: timestamp
+		last_login 	: timestamp
+		profile		: {
+		    			name 	: "String"
+		    			age 	: Integer
+		    			date of birth : timestamp
+		    			status : "string"
+		    			address :  {
+							local_address:{
+							
+							_id : Object_id()
+							street : "String"
+							city : "String"
+							state : "String"
+							country : "String"
+							
+							phone 		: [Integer]
+							}
+							
+							Parmanant_address:{
+							
+							_id : Object_id()
+							street : "String"
+							city : "String"
+							state : "String"
+							country : "String"
+							
+							phone 		: [Integer]
+							}
+							
+							
+													
+							}
+							
+							
+			      			  
+						
+	}
+
+ Roles {
+		_id 		: Object_Id
+		role_type 	: [type of user]
+		permissions 	: [permissions]
+     	}
+
+ Pages {
+		_id 		: Object_Id
+		title 		: "String"
+		slug 		: "String"
+		user_id 	: Object_Id
+		contents 	: "String"
+		views 		:  	
+				{ 
+				first_view :{_id : Object_id(), content : "String" , user_id : Object_Id},		      		     
+		   		 }
+     	}
+
+
+ Blogs {
+		_id 		: Object_Id
+		title 		: "String"
+		slug 		: "String"
+		user_id 	: Object_Id
+		contents 	: "String"
+		comments  	: {
+				 first_comments:{_id : Object_id(), content : "String" , user_id : Object_Id}
+		   		  }
+     	}
