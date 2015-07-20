@@ -1,0 +1,271 @@
+<html>
+
+<head>
+<script type="text/javascript">
+
+function table (name) {
+	
+	this.Name = name;
+	this.getThisTable =getThisTable;
+	this.addToTable = addToTable;
+	this.addNextCol = addNextCol;
+	
+}	
+		
+function getThisTable(name) {
+		
+		
+			 
+			 var getTable = document.getElementById(name);
+			 
+			 if(!getTable){
+				 
+				var getTable = document.createElement("table");
+				
+				getTable.setAttribute("id",name);
+				
+				var para = document.createElement("p");
+				
+				var node = document.createTextNode("------"+name+"------");
+				
+				para.appendChild(node);
+				
+				var element = document.getElementById("div1");
+				element.appendChild(para);
+				element.appendChild(getTable);
+				//window.alert("inside if condition");
+				 }
+				 
+				 return getTable;
+			
+
+			}
+
+if(localStorage.getItem('btn_no')){
+var bttn_id = parseInt(localStorage.getItem('btn_no'));	
+}
+else{ 
+var bttn_id = 1000;	
+}
+
+function addToTable(task,ipTable){
+			bttn_id = bttn_id + 1;
+			
+			//window.alert("new btn id is "+ bttn_id);
+			//var ipTable = document.getElementById(this.Name);
+			
+			var row = ipTable.insertRow(0);
+    
+			var cell1 = row.insertCell(0);
+   
+			cell1.innerHTML = task;
+    
+			addNextCol(ipTable,row);
+			
+			return row;
+			
+}
+
+//var task_var;
+
+function addNextCol(ipTable , row) {
+			
+			var name = ipTable.getAttribute("id")
+
+			if(name == "TODO"){
+			
+			
+					var cell2 = row.insertCell(1);
+					//window.alert("row is equal to " + row.childNodes[0].innerHTML);
+								//window.alert(name);
+								
+						task_var = row.childNodes[0].innerHTML;
+			
+			cell2.innerHTML = "<button class = '"+ bttn_id +"' onclick = addtoComplete("+ bttn_id +")>done</button>";
+		
+					var cell3 = row.insertCell(2);
+			cell3.innerHTML = "<button class = '"+ bttn_id +"' onclick = addtoHistory("+ bttn_id +")>remove</button>";
+				
+				}
+			else if (name == "Complete"){
+				var cell2 = row.insertCell(1);
+				
+		cell2.innerHTML = "<button class = '"+ bttn_id +"' onclick = addtoHistory("+ bttn_id +")>Move To History</button>";
+				
+				}
+			
+			else if(name == "History"){
+				
+				//window.alert("ready to edit");
+			var cell2 = row.insertCell(1);	
+			var check = row;
+			cell2.innerHTML = "<button class = '"+ bttn_id +"' onclick = delete_row("+ bttn_id +")> Clear </button>";
+				
+				}
+				 
+			
+}
+
+
+
+
+</script>
+
+</head>
+<body>
+
+<script type="text/javascript">
+var tb = new table("TODO");
+
+var cmplt = new table("Complete");
+
+var hist = new table ("History");
+
+
+
+function getTask(event){
+	
+	var whichButton = document.getElementsByClassName(event);  //  whichButton
+    
+    var parentOfButton = whichButton[0].parentNode; //  parentOfButton
+    
+    var whichRow = parentOfButton.parentNode;  // whichRow
+    
+    var taskColumn = whichRow.firstChild; // taskColumn
+    
+    var textOfCollumn = taskColumn.textContent; //textOfCollumn
+	
+	return textOfCollumn;
+	
+	}
+
+
+
+function delete_row(btn_id){
+		
+    var whichButton = document.getElementsByClassName(btn_id);
+    var parentOfButton = whichButton[0].parentNode;
+    var whichRow = parentOfButton.parentNode;
+    var tabl = whichRow.parentNode;
+    tabl.removeChild(whichRow);
+
+	//window.alert("row to be deleted is " + check);
+
+}
+
+function addtoHistory( btn_id ) {
+
+	var histtb = hist.getThisTable("History");
+	var task_var = getTask(btn_id);
+	hist.addToTable(task_var,histtb);
+	delete_row(btn_id);
+	
+}
+
+function addtoComplete(btn_id){
+	
+	var cmpltb = cmplt.getThisTable("Complete");
+//	window.alert(row);
+	var task_var = getTask(btn_id);
+	cmplt.addToTable(task_var,cmpltb);
+	delete_row(btn_id);
+	
+
+}
+
+
+function addtoTODO() {
+
+var todo_table = tb.getThisTable("TODO");
+var task = document.getElementById("myTask").value;
+var row = tb.addToTable(task,todo_table);
+//window.alert(row);
+//tb.addNextCol(todo_table , row);
+//window.alert(todo_table);
+
+}
+
+
+function mysave(){
+	
+	var savedTODO = document.getElementById("TODO").innerHTML;
+	var savedComplete = document.getElementById("Complete").innerHTML;
+	var savedHistory = document.getElementById("History").innerHTML;
+//	var savedPending = document.getElementById("Pending").innerHTML;
+	
+	//window.alert(saved);
+	
+	localStorage.setItem('todos', savedTODO);
+	localStorage.setItem('complete', savedComplete);
+	localStorage.setItem('history', savedHistory);
+//	localStorage.setItem('pending', savedPending);
+	localStorage.setItem('btn_no',bttn_id);
+	}
+	
+
+
+	
+function reload() {
+	
+if(1){
+
+var todo_table = tb.getThisTable("TODO");
+todo_table.innerHTML = localStorage.getItem('todos');
+}
+
+if(1){
+
+var todo_table = tb.getThisTable("Complete");
+
+todo_table.innerHTML = localStorage.getItem('complete');
+}
+//localStorage.getItem('history').childElementCount > 0
+
+if(1){
+
+var todo_table = tb.getThisTable("History");
+
+todo_table.innerHTML = localStorage.getItem('history');
+}
+//document.getElementById("Pending").innerHTML = localStorage.getItem('pending');
+
+}
+
+
+window.onload = reload ;
+window.onbeforeunload = mysave;
+</script>
+
+<h1>
+
+My Task Board
+
+</h1>
+
+
+
+
+Task: <input type="text" id="myTask">
+
+<button type="button" onclick= addtoTODO()>
+Push task to TODO list.</button>
+
+<br></br>
+<br></br>
+
+
+<div id="div1">
+
+</div>
+
+
+
+
+
+</body>
+
+
+
+
+</html>
+	
